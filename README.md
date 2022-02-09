@@ -6,12 +6,11 @@ Protótipo de framework baseado em Docker para desenvolver Sistemas Multiagente 
 ## Pré-requisitos
 ```
 Docker
-Python3
 ```
 
 ## Configuração
 
-A maior parte da configuração é feita no arquivo `setup.py`.
+A maior parte da configuração é feita nos arquivos: `docker-compose.yaml` e `.env`.
 
 ## Uso
 
