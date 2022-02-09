@@ -74,7 +74,7 @@ services:
     tty: true           # Container alive
     command: "python3 /teste/python_execute_netlogo.py"
     environment:
-    - PYTHONUNBUFFERED = 1
+    - PYTHONUNBUFFERED=1
     - my_hostname=modelo_2
     - model_file=/teste/6-Open_Sugarscape_2_Constant_Growback.nlogo
     - experiment=experiment1
@@ -95,7 +95,7 @@ services:
     tty: true           # Container alive
     command: "python3 /teste/router.py"
     environment:
-    - PYTHONUNBUFFERED = 1
+    - PYTHONUNBUFFERED=1
     - my_hostname=router
     - output_agents=${output_agents}
     - general_dead_agents_file=${general_dead_agents_file}
