@@ -16,5 +16,5 @@ A maior parte da configuração é feita nos arquivos: `docker-compose.yaml` e `
 
 Depois de ter tudo configurado, basta rodar:
 ```
-python setup.py
+docker-compose up -d
 ```
