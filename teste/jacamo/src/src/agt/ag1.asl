@@ -4,6 +4,9 @@
    <- .print("Checking and creating agent if it exists on file");
       mylib.my_create_ag;
       .wait(5000);
+      .print("Deleting agent with internal action");
+      mylib.my_delete_ag;
+      .wait(5000);
       !start.
 
 /*
@@ -16,6 +19,11 @@
       .wait(100);
       .print("Killing agent bob!");
       .kill_agent(bob);
+
+      .print("Deleting agent with internal action");
+      mylib.my_delete_ag;
+
+      .wait(100);
 
       .print("Creating agent with internal action");
       mylib.my_create_ag;

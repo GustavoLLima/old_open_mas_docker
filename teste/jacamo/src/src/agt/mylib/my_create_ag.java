@@ -30,7 +30,7 @@ public class my_create_ag extends DefaultInternalAction {
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
 
-        System.out.println("Executing JAVA custom code");
+        System.out.println("Executing JAVA custom code - create");
 
         if (Files.exists(Paths.get("/teste/important/send_agent3.txt")) && Files.size(Paths.get("/teste/important/send_agent3.txt")) >= 0 ) {
             System.out.println("existe e não vazio");
@@ -77,9 +77,9 @@ public class my_create_ag extends DefaultInternalAction {
                     });
                 }
 
-                System.out.println("! Deleting After creating agents !");
-                Files.delete(Paths.get("/teste/important/send_agent3.txt"));
-                System.out.println("! Deleted !");
+                // System.out.println("! Deleting After creating agents !");
+                // Files.delete(Paths.get("/teste/important/send_agent3.txt"));
+                // System.out.println("! Deleted !");
             }
             else {
                 System.out.println("/teste/important/send_agent3.txt não existe");
