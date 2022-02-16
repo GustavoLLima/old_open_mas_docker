@@ -54,38 +54,65 @@ public class my_delete_ag extends DefaultInternalAction {
             //     }
             // }
 
+            if (names.size() > 2){
+                System.out.println("Mais de 2 agentes, processando");
 
-            System.out.println("Random agent:");
-            Random Dice = new Random();
+                System.out.println("Random agent:");
+                Random Dice = new Random();
 
-            String str = "";
+                String str = "";
 
-            // for (int i = 0; i < 50; i++) {
-            //   do {
-            //     int n = Dice.nextInt(y.length);
-            //     str = y[n];
-            // } while (str.equals("sample_agent") || str.equals("ag1"));
+                // for (int i = 0; i < 50; i++) {
+                //   do {
+                //     int n = Dice.nextInt(y.length);
+                //     str = y[n];
+                // } while (str.equals("sample_agent") || str.equals("ag1"));
 
-            // System.out.println(str);
-            // }
+                // System.out.println(str);
+                // }
 
-            do {
-                int n = Dice.nextInt(y.length);
-                str = y[n];
-            } while (str.equals("sample_agent") || str.equals("ag1"));
+                do {
+                    int n = Dice.nextInt(y.length);
+                    str = y[n];
+                } while (str.equals("sample_agent") || str.equals("ag1"));
 
-            System.out.println("Agent randomly chosen:");
-            System.out.println(str);
+                System.out.println("Agent randomly chosen:");
+                System.out.println(str);
 
-            //names = rs.getAgentsNames();
+                //names = rs.getAgentsNames();
+
+                // System.out.println("Estado:");
+                // System.out.println(rs.getAgStateAsString(str));
 
 
-            if (rs.killAgent(str, null, 0))
-                System.out.println("Agent killed!");
+                System.out.println("Before kill:");
+                System.out.println(rs.getAgentsQty());
+
+                if (rs.killAgent(str, null, 0)){
+                    System.out.println("Agent string:");
+                    String agent_string = "["+"\""+"agent"+"\""+" 121 1 2 3 "+"\""+"1-2"+"\""+"]"+"\n";
+                    System.out.println(agent_string);
+                    if (Files.exists(Paths.get("/teste/important/send_agent3.txt"))){
+                        System.out.println("Adicionando...");
+                        Files.write(Paths.get("/teste/important/send_agent3.txt"),agent_string.getBytes(), StandardOpenOption.APPEND);
+                    }
+                    else{
+                        System.out.println("Criando...");
+                        Files.write(Paths.get("/teste/important/send_agent3.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
+                    }
+                    // Files.write(Paths.get("send_agent33.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
+                    System.out.println("Agent killed!");
+                }
+
+                System.out.println("After kill:");
+                System.out.println(rs.getAgentsQty());
+            } else {
+                System.out.println("Menos de 2 agentes, sem agentes para processar");
+            }
 
 
-            // System.out.println("Before kill:");
-            // System.out.println(rs.getAgentsQty());
+            System.out.println("Before kill:");
+            System.out.println(rs.getAgentsQty());
 
             // if (rs.killAgent(str, null, 0))
             //     System.out.println("Agent killed!");

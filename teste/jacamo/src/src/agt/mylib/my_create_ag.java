@@ -43,12 +43,12 @@ public class my_create_ag extends DefaultInternalAction {
             System.out.println("/teste/important/data0.txt não existe");
         }
         else {
-            if (Files.exists(Paths.get("/teste/important/send_agent3.txt"))) {
+            if (Files.exists(Paths.get("/teste/important/receive_agent3.txt"))) {
                 
                 // RuntimeServices provides services to create agents in the current platform (Local, JADE, JaCaMo, ...)
                 RuntimeServices rs = RuntimeServicesFactory.get();
 
-                String fileName = "/teste/important/send_agent3.txt";
+                String fileName = "/teste/important/receive_agent3.txt";
                 File file = new File(fileName);
 
                 try (Stream linesStream = Files.lines(file.toPath())) {
@@ -110,6 +110,121 @@ public class my_create_ag extends DefaultInternalAction {
         return true;
     }
 }
+
+
+// BACKUP ANTES DE JUNTAR COM A ESTRUTURA TODA, TA CRIANDO TODOS AGENTES DO ARQUIVO, 1 POR 1
+// package mylib;
+
+// import jason.*;
+// import jason.runtime.*;
+// import jason.asSemantics.*;
+// import jason.asSyntax.*;
+
+// import java.nio.file.Path;
+// import java.nio.file.Files;
+// import java.nio.file.Paths;
+// import java.io.*;
+// import java.util.List;
+
+// // FUNCIONAVA SÓ LENDO, AGORA QUERO ESCREVER
+// // import java.nio.charset.StandardCharsets;
+
+// import java.nio.charset.StandardCharsets;
+// import java.nio.file.StandardOpenOption;
+
+
+// // SÓ PRO RANDOM NO NOME, SE NÃO USAR, TIRAR
+// import java.util.Random;
+
+// //import java.io.File;
+
+// import java.util.stream.Stream;
+
+// public class my_create_ag extends DefaultInternalAction {
+
+//     @Override
+//     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
+
+//         System.out.println("Executing JAVA custom code - create");
+
+//         if (Files.exists(Paths.get("/teste/important/send_agent3.txt")) && Files.size(Paths.get("/teste/important/send_agent3.txt")) >= 0 ) {
+//             System.out.println("existe e não vazio");
+//         }
+//         else {
+//             System.out.println("não existe ou vazio");
+//         }
+
+//         if (Files.exists(Paths.get("/teste/important/data0.txt"))) {
+//             System.out.println("/teste/important/data0.txt não existe");
+//         }
+//         else {
+//             if (Files.exists(Paths.get("/teste/important/send_agent3.txt"))) {
+                
+//                 // RuntimeServices provides services to create agents in the current platform (Local, JADE, JaCaMo, ...)
+//                 RuntimeServices rs = RuntimeServicesFactory.get();
+
+//                 String fileName = "/teste/important/send_agent3.txt";
+//                 File file = new File(fileName);
+
+//                 try (Stream linesStream = Files.lines(file.toPath())) {
+//                     linesStream.forEach(line2 -> {
+//                         String name = "";
+//                         String aehoo = String.valueOf(line2);
+
+//                         System.out.println(aehoo);
+
+//                         String[] splitStr = aehoo.split("\\s+");
+
+//                         // use Settings to add initial beliefs and goals for the new agent
+//                         // (as used in the .mas2j project file)
+//                         Settings s = new Settings();
+//                         String bels = "b(10),b(20)";
+//                         s.addOption(Settings.INIT_BELS, bels+ ", b("+splitStr[2]+"), b("+splitStr[3]+"), b("+splitStr[4]+")");
+//                         s.addOption(Settings.INIT_GOALS, "a");
+
+//                         try {
+//                             rs.createAgent(splitStr[1], "bob.asl", null, null, null, s, ts.getAg());
+//                             rs.startAgent(splitStr[1]);
+//                             System.out.println("Agent created by custom file");
+//                         } catch (Exception e) {
+
+//                         }
+//                     });
+//                 }
+
+//                 // System.out.println("! Deleting After creating agents !");
+//                 // Files.delete(Paths.get("/teste/important/send_agent3.txt"));
+//                 // System.out.println("! Deleted !");
+//             }
+//             else {
+//                 System.out.println("/teste/important/send_agent3.txt não existe");
+//             }
+//         }
+
+
+//         // System.out.println("Writing...");
+
+//         // Files.write(Paths.get("data2.txt"), "the text \n".getBytes(), StandardOpenOption.CREATE);
+//         // Files.write(Paths.get("data2.txt"), "aehoo \n".getBytes(), StandardOpenOption.APPEND);
+
+//         // System.out.println("Reading...");
+
+//         // String fileName2 = "data2.txt";
+//         // File file2 = new File(fileName2);
+
+//         // byte [] fileBytes2 = Files.readAllBytes(file2.toPath());
+//         // char singleChar2;
+//         // for(byte b2 : fileBytes2) {
+//         //   singleChar2 = (char) b2;
+//         //   System.out.print(singleChar2);
+//         // }
+
+//         // System.out.println("Done.");
+
+//         // everything ok, so returns true
+//         return true;
+//     }
+// }
 
 
 // BACKUP ESCREVE BELS PRA 1 AGENTE SÓ
