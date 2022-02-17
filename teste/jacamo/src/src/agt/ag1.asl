@@ -3,10 +3,8 @@
 +!start : true
    <- .print("Checking and creating agent if it exists on file");
       mylib.my_create_ag;
-      .wait(5000);
       .print("Deleting agent with internal action");
       mylib.my_delete_ag;
-      .wait(5000);
       !start.
 
 /*

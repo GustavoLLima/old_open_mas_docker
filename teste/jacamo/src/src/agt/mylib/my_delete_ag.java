@@ -71,41 +71,72 @@ public class my_delete_ag extends DefaultInternalAction {
                 // System.out.println(str);
                 // }
 
+                int tries = 0;
+
                 do {
                     int n = Dice.nextInt(y.length);
                     str = y[n];
-                } while (str.equals("sample_agent") || str.equals("ag1"));
+                    tries++;
+                // } while (tries < 10 && (!str.equals("sample_agent") && !str.equals("ag1") && !str.equals("df")));
+                } while (tries < 10 && str.matches("\\d+"));
 
-                System.out.println("Agent randomly chosen:");
-                System.out.println(str);
-
-                //names = rs.getAgentsNames();
-
-                // System.out.println("Estado:");
-                // System.out.println(rs.getAgStateAsString(str));
-
-
-                System.out.println("Before kill:");
-                System.out.println(rs.getAgentsQty());
-
-                if (rs.killAgent(str, null, 0)){
-                    System.out.println("Agent string:");
-                    String agent_string = "["+"\""+"agent"+"\""+" 121 1 2 3 "+"\""+"1-2"+"\""+"]"+"\n";
-                    System.out.println(agent_string);
-                    if (Files.exists(Paths.get("/teste/important/send_agent3.txt"))){
-                        System.out.println("Adicionando...");
-                        Files.write(Paths.get("/teste/important/send_agent3.txt"),agent_string.getBytes(), StandardOpenOption.APPEND);
-                    }
-                    else{
-                        System.out.println("Criando...");
-                        Files.write(Paths.get("/teste/important/send_agent3.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
-                    }
-                    // Files.write(Paths.get("send_agent33.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
-                    System.out.println("Agent killed!");
+                if(str.equals("sample_agent") || str.equals("ag1") || str.equals("df")){
+                    throw new IllegalArgumentException("Deu ruim");
                 }
 
-                System.out.println("After kill:");
-                System.out.println(rs.getAgentsQty());
+                if (!str.equals("")){
+                    System.out.println("Agent randomly chosen:");
+                    System.out.println(str);
+
+                    //names = rs.getAgentsNames();
+
+                    // System.out.println("Estado:");
+                    // System.out.println(rs.getAgStateAsString(str));
+
+
+                    System.out.println("Before kill:");
+                    System.out.println(rs.getAgentsQty());
+
+                    if (rs.killAgent(str, null, 0)){
+                        int sugar = (Dice.nextInt(25) + 5);
+                        int metabolism = (Dice.nextInt(4) + 1);
+                        int vision = (Dice.nextInt(6) + 1);
+
+                        System.out.println("Agent string:");
+                        String agent_string = "["+"\""+"agent"+"\""+" "+str+" "+sugar+" "+metabolism+" "+vision+" "+"\""+"3"+"\""+"]"+"\n";
+                        // String agent_string = "["+"\""+"agent"+"\""+" "+str+" 1 2 3 "+"\""+"3"+"\""+"]"+"\n";
+                        //String agent_string = "["+"\""+"agent"+"\""+" 999999999 1 2 3 "+"\""+"1-2"+"\""+"]"+"\n";
+                        System.out.println(agent_string);
+                        if (Files.exists(Paths.get("/teste/important/send_agent3.txt"))){
+                            System.out.println("Adicionando...");
+                            Files.write(Paths.get("/teste/important/send_agent3.txt"),agent_string.getBytes(), StandardOpenOption.APPEND);
+                        }
+                        else{
+                            System.out.println("Criando...");
+                            Files.write(Paths.get("/teste/important/send_agent3.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
+                        }
+
+
+                        if (Files.exists(Paths.get("/teste/important/general_send_agent.txt"))){
+                            System.out.println("Adicionando...");
+                            Files.write(Paths.get("/teste/important/general_send_agent.txt"),agent_string.getBytes(), StandardOpenOption.APPEND);
+                        }
+                        else{
+                            System.out.println("Criando...");
+                            Files.write(Paths.get("/teste/important/general_send_agent.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
+                        }
+
+
+                        // Files.write(Paths.get("send_agent33.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
+                        System.out.println("Agent killed!");
+                    }
+
+                    System.out.println("After kill:");
+                    System.out.println(rs.getAgentsQty());
+                } else {
+                    System.out.println("Max tries achieved, return on next run");
+                }
+                str = "";
             } else {
                 System.out.println("Menos de 2 agentes, sem agentes para processar");
             }

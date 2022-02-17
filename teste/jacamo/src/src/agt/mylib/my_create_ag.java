@@ -32,58 +32,57 @@ public class my_create_ag extends DefaultInternalAction {
 
         System.out.println("Executing JAVA custom code - create");
 
-        if (Files.exists(Paths.get("/teste/important/send_agent3.txt")) && Files.size(Paths.get("/teste/important/send_agent3.txt")) >= 0 ) {
-            System.out.println("existe e não vazio");
+        // if (Files.exists(Paths.get("/teste/important/send_agent3.txt")) && Files.size(Paths.get("/teste/important/send_agent3.txt")) >= 0 ) {
+        //     System.out.println("existe e não vazio");
+        // }
+        // else {
+        //     System.out.println("não existe ou vazio");
+        // }
+
+        if (Files.exists(Paths.get("/teste/important/receive_agent3.txt")) && Files.size(Paths.get("/teste/important/receive_agent3.txt")) >= 0) {
+            
+            // RuntimeServices provides services to create agents in the current platform (Local, JADE, JaCaMo, ...)
+            RuntimeServices rs = RuntimeServicesFactory.get();
+
+            String fileName = "/teste/important/receive_agent3.txt";
+            File file = new File(fileName);
+
+            try (Stream linesStream = Files.lines(file.toPath())) {
+                linesStream.forEach(line2 -> {
+                    String name = "";
+                    String aehoo = String.valueOf(line2);
+
+                    System.out.println(aehoo);
+
+                    String[] splitStr = aehoo.split("\\s+");
+
+                    // use Settings to add initial beliefs and goals for the new agent
+                    // (as used in the .mas2j project file)
+                    Settings s = new Settings();
+                    String bels = "b(10),b(20)";
+                    s.addOption(Settings.INIT_BELS, bels+ ", b("+splitStr[2]+"), b("+splitStr[3]+"), b("+splitStr[4]+")");
+                    s.addOption(Settings.INIT_GOALS, "a");
+
+                    try {
+                        rs.createAgent(splitStr[1], "bob.asl", null, null, null, s, ts.getAg());
+                        rs.startAgent(splitStr[1]);
+                        System.out.println("Agent created by custom file");
+                    } catch (Exception e) {
+
+                    }
+                });
+
+                System.out.println("! Deleting After creating agents !");
+                Files.delete(Paths.get("/teste/important/receive_agent3.txt"));
+                System.out.println("! Deleted !");
+            }
+
+            // System.out.println("! Deleting After creating agents !");
+            // Files.delete(Paths.get("/teste/important/send_agent3.txt"));
+            // System.out.println("! Deleted !");
         }
         else {
-            System.out.println("não existe ou vazio");
-        }
-
-        if (Files.exists(Paths.get("/teste/important/data0.txt"))) {
-            System.out.println("/teste/important/data0.txt não existe");
-        }
-        else {
-            if (Files.exists(Paths.get("/teste/important/receive_agent3.txt"))) {
-                
-                // RuntimeServices provides services to create agents in the current platform (Local, JADE, JaCaMo, ...)
-                RuntimeServices rs = RuntimeServicesFactory.get();
-
-                String fileName = "/teste/important/receive_agent3.txt";
-                File file = new File(fileName);
-
-                try (Stream linesStream = Files.lines(file.toPath())) {
-                    linesStream.forEach(line2 -> {
-                        String name = "";
-                        String aehoo = String.valueOf(line2);
-
-                        System.out.println(aehoo);
-
-                        String[] splitStr = aehoo.split("\\s+");
-
-                        // use Settings to add initial beliefs and goals for the new agent
-                        // (as used in the .mas2j project file)
-                        Settings s = new Settings();
-                        String bels = "b(10),b(20)";
-                        s.addOption(Settings.INIT_BELS, bels+ ", b("+splitStr[2]+"), b("+splitStr[3]+"), b("+splitStr[4]+")");
-                        s.addOption(Settings.INIT_GOALS, "a");
-
-                        try {
-                            rs.createAgent(splitStr[1], "bob.asl", null, null, null, s, ts.getAg());
-                            rs.startAgent(splitStr[1]);
-                            System.out.println("Agent created by custom file");
-                        } catch (Exception e) {
-
-                        }
-                    });
-                }
-
-                // System.out.println("! Deleting After creating agents !");
-                // Files.delete(Paths.get("/teste/important/send_agent3.txt"));
-                // System.out.println("! Deleted !");
-            }
-            else {
-                System.out.println("/teste/important/send_agent3.txt não existe");
-            }
+            System.out.println("/teste/important/receive_agent3.txt não existe");
         }
 
 

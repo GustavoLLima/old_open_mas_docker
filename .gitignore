@@ -3,5 +3,4 @@ logs/**
 
 teste/important/**
 # exception to the rule
-!teste/important/.gitkeep 
-!teste/important/receive_agent3.txt
+!teste/important/.gitkeep
