@@ -80,13 +80,15 @@ public class my_delete_ag extends DefaultInternalAction {
                 // } while (tries < 10 && (!str.equals("sample_agent") && !str.equals("ag1") && !str.equals("df")));
                 // } while (tries < 10 && str.matches("\\d+"));
 
-                    if (str.matches("^[0-9]*$")){
+                    // if (str.matches("^[0-9]*$")){
+                    if (str.matches(".*\\d.*")){
                         System.out.println("Match, string:");
                         System.out.println(str);
                         // break;
                     }
                 // } while (tries < 10 && str.matches("^[0-9]*$"));
-                } while (tries < 10 && !str.matches("^[0-9]*$"));
+                // } while (tries < 10 && !str.matches("^[0-9]*$"));
+                } while (tries < 10 && !str.matches(".*\\d.*"));
 
                 if (tries == 10){
                     System.out.println("Max attempts achieved");
