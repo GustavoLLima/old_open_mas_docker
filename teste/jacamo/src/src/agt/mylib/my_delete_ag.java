@@ -57,7 +57,7 @@ public class my_delete_ag extends DefaultInternalAction {
             if (names.size() > 2){
                 System.out.println("Mais de 2 agentes, processando");
 
-                System.out.println("Random agent:");
+                // System.out.println("Random agent:");
                 Random Dice = new Random();
 
                 String str = "";
@@ -78,7 +78,25 @@ public class my_delete_ag extends DefaultInternalAction {
                     str = y[n];
                     tries++;
                 // } while (tries < 10 && (!str.equals("sample_agent") && !str.equals("ag1") && !str.equals("df")));
-                } while (tries < 10 && str.matches("\\d+"));
+                // } while (tries < 10 && str.matches("\\d+"));
+
+                    if (str.matches("^[0-9]*$")){
+                        System.out.println("Match, string:");
+                        System.out.println(str);
+                        // break;
+                    }
+                // } while (tries < 10 && str.matches("^[0-9]*$"));
+                } while (tries < 10 && !str.matches("^[0-9]*$"));
+
+                if (tries == 10){
+                    System.out.println("Max attempts achieved");
+                    System.out.println(tries);
+                } else {
+                    System.out.println("Attempts nao foi 10");
+                    System.out.println(tries);
+                    System.out.println("String escolhida:");
+                    System.out.println(str);
+                }
 
                 if(str.equals("sample_agent") || str.equals("ag1") || str.equals("df")){
                     throw new IllegalArgumentException("Deu ruim");
@@ -142,8 +160,8 @@ public class my_delete_ag extends DefaultInternalAction {
             }
 
 
-            System.out.println("Before kill:");
-            System.out.println(rs.getAgentsQty());
+            // System.out.println("Before kill:");
+            // System.out.println(rs.getAgentsQty());
 
             // if (rs.killAgent(str, null, 0))
             //     System.out.println("Agent killed!");
