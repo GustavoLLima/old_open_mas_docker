@@ -22,7 +22,9 @@ initial_print.
   .concat("",X, " ", Y, " ", Z, TESTE2)
   .print("Previous Information Function:");
   .print("My previous information X, Y, Z: ", X, Y, Z);
-  .print("My previous information TESTE2: ", TESTE2).
+  .print("My previous information TESTE2: ", TESTE2);
+  mylib.aaa_my_delete_ag(X, Y, Z);
+  .print("Sended to aaa_my_delete_ag").
 
 
 

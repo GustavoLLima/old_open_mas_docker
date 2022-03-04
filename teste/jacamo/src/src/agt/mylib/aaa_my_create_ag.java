@@ -80,7 +80,7 @@ public class aaa_my_create_ag extends DefaultInternalAction {
                     // String bels = "b(["+ ch + escape_agent + " " + splitStr[1] + " " + splitStr[2] + " " + splitStr[3] + " " + splitStr[4] + " " + escape_path + ch + "])";
 
 
-                    // PARTINDO EM VÁRIAS STRINGS
+                    // PARTINDO EM VARIAS STRINGS
                     // String bels = "previous_0(" + ch + escape_agent + ch + ")";
                     // bels = bels + ",previous_1("+ splitStr[1] + ")";
                     // bels = bels + ",previous_2("+ splitStr[2] + ")";

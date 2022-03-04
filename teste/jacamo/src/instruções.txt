@@ -1,3 +1,5 @@
+**TA MONTANDO CAMINHO NO MY_DELETE CERTINHO, ESCREVENDO NOS ARQUIVOS QUE PRECISA PRA ESTRUTURA**
+
 pra funcionar, precisa adicionar o receive 3 dentro da pasta do src (não é no volume)
 
 as funções do java tem variável pra determinar se ta testando no gradlew ou no docker

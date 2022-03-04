@@ -45,6 +45,48 @@ public class aaa_my_delete_ag extends DefaultInternalAction {
         }
 
         System.out.println("Executing JAVA custom code - delete");
+
+        System.out.println("Java Args0: "+args[0]);
+        System.out.println("Java Args1: "+args[1]);
+        System.out.println("Java Args2: "+args[2]);
+        
+        // String custom_args1 = args[1].replace("\"", "");
+
+        String custom_args1 = String.valueOf(args[1]);
+        String custom_args2 = String.valueOf(args[2]);
+
+        custom_args1 = custom_args1.replace("\"", "");
+        custom_args2 = custom_args2.substring(1, custom_args2.length() - 1);
+
+        if (custom_args2 == "")
+            custom_args2 = "\"" + custom_args2 + "3" + "\"";
+        else
+            custom_args2 = "\"" + custom_args2 + "-3" + "\"";
+
+        String full_path_string = "";
+        full_path_string = "[" + args[0] + " " + custom_args1 + " " + custom_args2 + "]" + "\n";
+
+        System.out.println("Java full path string: "+full_path_string);
+
+        if (Files.exists(Paths.get(path1))){
+            System.out.println("Adicionando...");
+            Files.write(Paths.get(path1),full_path_string.getBytes(), StandardOpenOption.APPEND);
+        }
+        else{
+            System.out.println("Criando...");
+            Files.write(Paths.get(path1),full_path_string.getBytes(), StandardOpenOption.CREATE);
+        }
+
+
+        if (Files.exists(Paths.get(path2))){
+            System.out.println("Adicionando...");
+            Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.APPEND);
+        }
+        else{
+            System.out.println("Criando...");
+            Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.CREATE);
+        }
+
         // System.out.println("----------------------------------INICIO----------------------------");
 
         try {
