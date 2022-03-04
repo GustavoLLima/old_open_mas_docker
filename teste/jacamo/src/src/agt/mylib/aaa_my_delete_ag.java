@@ -32,195 +32,61 @@ public class aaa_my_delete_ag extends DefaultInternalAction {
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
 
-        boolean using_docker = false;
-        String path1 = "";
-        String path2 = "";
-
-        if (using_docker){
-            path1 = "/teste/important/send_agent3.txt";
-            path2 = "/teste/important/general_send_agent.txt";
-        } else {
-            path1 = "teste/important/send_agent3.txt";
-            path2 = "teste/important/general_send_agent.txt";
-        }
-
-        System.out.println("Executing JAVA custom code - delete");
-
-        System.out.println("Java Args0: "+args[0]);
-        System.out.println("Java Args1: "+args[1]);
-        System.out.println("Java Args2: "+args[2]);
-        
-        // String custom_args1 = args[1].replace("\"", "");
-
-        String custom_args1 = String.valueOf(args[1]);
-        String custom_args2 = String.valueOf(args[2]);
-
-        custom_args1 = custom_args1.replace("\"", "");
-        custom_args2 = custom_args2.substring(1, custom_args2.length() - 1);
-
-        if (custom_args2 == "")
-            custom_args2 = "\"" + custom_args2 + "3" + "\"";
-        else
-            custom_args2 = "\"" + custom_args2 + "-3" + "\"";
-
-        String full_path_string = "";
-        full_path_string = "[" + args[0] + " " + custom_args1 + " " + custom_args2 + "]" + "\n";
-
-        System.out.println("Java full path string: "+full_path_string);
-
-        if (Files.exists(Paths.get(path1))){
-            System.out.println("Adicionando...");
-            Files.write(Paths.get(path1),full_path_string.getBytes(), StandardOpenOption.APPEND);
-        }
-        else{
-            System.out.println("Criando...");
-            Files.write(Paths.get(path1),full_path_string.getBytes(), StandardOpenOption.CREATE);
-        }
-
-
-        if (Files.exists(Paths.get(path2))){
-            System.out.println("Adicionando...");
-            Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.APPEND);
-        }
-        else{
-            System.out.println("Criando...");
-            Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.CREATE);
-        }
-
-        // System.out.println("----------------------------------INICIO----------------------------");
-
         try {
-            // RuntimeServices provides services to create agents in the current platform (Local, JADE, JaCaMo, ...)
-            RuntimeServices rs = RuntimeServicesFactory.get();
+            boolean using_docker = false;
+            String path1 = "";
+            String path2 = "";
 
-            String str = "agkeaogkeapodfkea";
+            if (using_docker){
+                path1 = "/teste/important/send_agent3.txt";
+                path2 = "/teste/important/general_send_agent.txt";
+            } else {
+                path1 = "teste/important/send_agent3.txt";
+                path2 = "teste/important/general_send_agent.txt";
+            }
 
-            Term t = new ObjectTermImpl(str);
+            System.out.println("Executing JAVA custom code - delete");
 
-            // System.out.println("args0: "+ args[0]);
+            System.out.println("Java Args0: "+args[0]);
+            System.out.println("Java Args1: "+args[1]);
+            System.out.println("Java Args2: "+args[2]);
+            
+            // String custom_args1 = args[1].replace("\"", "");
 
-            // unify the result
-            return un.unifies(args[1], t);
+            String custom_args1 = String.valueOf(args[1]);
+            String custom_args2 = String.valueOf(args[2]);
 
+            custom_args1 = custom_args1.replace("\"", "");
+            custom_args2 = custom_args2.substring(1, custom_args2.length() - 1);
 
-            // Collection<String> names = rs.getAgentsNames();
-            // String y[] = names.toArray(new String[names.size()]);
-            // System.out.println("All agents:");
-            // System.out.println(names);
+            if (custom_args2 == "")
+                custom_args2 = "\"" + custom_args2 + "3" + "\"";
+            else
+                custom_args2 = "\"" + custom_args2 + "-3" + "\"";
 
-            // System.out.println("Agent string:");
-            // String agent_string = "["+"\""+"agent"+"\""+" "+str+" "+sugar+" "+metabolism+" "+vision+" "+"\""+"3"+"\""+"]"+"\n";
-            // System.out.println(agent_string);
-            // if (Files.exists(Paths.get(path1))){
-            //     System.out.println("Adicionando...");
-            //     Files.write(Paths.get(path1),agent_string.getBytes(), StandardOpenOption.APPEND);
-            // }
-            // else{
-            //     System.out.println("Criando...");
-            //     Files.write(Paths.get(path1),agent_string.getBytes(), StandardOpenOption.CREATE);
-            // }
+            String full_path_string = "";
+            full_path_string = "[" + args[0] + " " + custom_args1 + " " + custom_args2 + "]" + "\n";
 
+            System.out.println("Java full path string: "+full_path_string);
 
-            // if (Files.exists(Paths.get(path2))){
-            //     System.out.println("Adicionando...");
-            //     Files.write(Paths.get(path2),agent_string.getBytes(), StandardOpenOption.APPEND);
-            // }
-            // else{
-            //     System.out.println("Criando...");
-            //     Files.write(Paths.get(path2),agent_string.getBytes(), StandardOpenOption.CREATE);
-            // }
-
-            // if (rs.killAgent(str, null, 0)){
-            //      // Files.write(Paths.get("send_agent33.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
-            //     System.out.println("Agent killed!");
-            // } else {
-
-            // }           
-
-            // if (names.size() > 2){
-            //     System.out.println("Mais de 2 agentes, processando");
-            //     Random Dice = new Random();
-
-            //     String str = "";
-
-            //     int tries = 0;
-
-            //     do {
-            //         int n = Dice.nextInt(y.length);
-            //         str = y[n];
-            //         tries++;
-
-            //         if (str.matches("^[0-9]*$")){
-            //             System.out.println("Match, string:");
-            //             System.out.println(str);
-            //             // break;
-            //         }
-            //     // } while (tries < 10 && str.matches("^[0-9]*$"));
-            //     } while (tries < 10 && !str.matches("^[0-9]*$"));
-
-            //     if (tries == 10){
-            //         System.out.println("Max attempts achieved");
-            //         System.out.println(tries);
-            //     } else {
-            //         System.out.println("Attempts nao foi 10");
-            //         System.out.println(tries);
-            //         System.out.println("String escolhida:");
-            //         System.out.println(str);
-            //     }
-
-            //     if(str.equals("sample_agent") || str.equals("ag1") || str.equals("df")){
-            //         throw new IllegalArgumentException("Deu ruim");
-            //     }
-
-            //     if (!str.equals("")){
-            //         System.out.println("Agent randomly chosen:");
-            //         System.out.println(str);
+            if (Files.exists(Paths.get(path1))){
+                System.out.println("Adicionando...");
+                Files.write(Paths.get(path1),full_path_string.getBytes(), StandardOpenOption.APPEND);
+            }
+            else{
+                System.out.println("Criando...");
+                Files.write(Paths.get(path1),full_path_string.getBytes(), StandardOpenOption.CREATE);
+            }
 
 
-            //         System.out.println("Before kill:");
-            //         System.out.println(rs.getAgentsQty());
-
-            //         if (rs.killAgent(str, null, 0)){
-            //             int sugar = (Dice.nextInt(25) + 5);
-            //             int metabolism = (Dice.nextInt(4) + 1);
-            //             int vision = (Dice.nextInt(6) + 1);
-
-            //             System.out.println("Agent string:");
-            //             String agent_string = "["+"\""+"agent"+"\""+" "+str+" "+sugar+" "+metabolism+" "+vision+" "+"\""+"3"+"\""+"]"+"\n";
-            //             System.out.println(agent_string);
-            //             if (Files.exists(Paths.get(path1))){
-            //                 System.out.println("Adicionando...");
-            //                 Files.write(Paths.get(path1),agent_string.getBytes(), StandardOpenOption.APPEND);
-            //             }
-            //             else{
-            //                 System.out.println("Criando...");
-            //                 Files.write(Paths.get(path1),agent_string.getBytes(), StandardOpenOption.CREATE);
-            //             }
-
-
-            //             if (Files.exists(Paths.get(path2))){
-            //                 System.out.println("Adicionando...");
-            //                 Files.write(Paths.get(path2),agent_string.getBytes(), StandardOpenOption.APPEND);
-            //             }
-            //             else{
-            //                 System.out.println("Criando...");
-            //                 Files.write(Paths.get(path2),agent_string.getBytes(), StandardOpenOption.CREATE);
-            //             }
-
-
-            //             // Files.write(Paths.get("send_agent33.txt"),agent_string.getBytes(), StandardOpenOption.CREATE);
-            //             System.out.println("Agent killed!");
-            //         }
-
-            //         System.out.println("After kill:");
-            //         System.out.println(rs.getAgentsQty());
-            //     } else {
-            //         System.out.println("Max tries achieved, return on next run");
-            //     }
-            //     str = "";
-            // } else {
-            //     System.out.println("Menos de 2 agentes, sem agentes para processar");
-            // }
+            if (Files.exists(Paths.get(path2))){
+                System.out.println("Adicionando...");
+                Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.APPEND);
+            }
+            else{
+                System.out.println("Criando...");
+                Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.CREATE);
+            }
         } catch (Exception e) {
             // printStackTrace method
             // prints line numbers + call stack
@@ -230,10 +96,8 @@ public class aaa_my_delete_ag extends DefaultInternalAction {
             System.out.println(e);
         }
 
-        // System.out.println("----------------------------------FIM----------------------------");
-
         // everything ok, so returns true
-        return false;
+        return true;
     }
 
     // @Override
