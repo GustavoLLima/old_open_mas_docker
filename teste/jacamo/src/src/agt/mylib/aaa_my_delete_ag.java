@@ -33,7 +33,10 @@ public class aaa_my_delete_ag extends DefaultInternalAction {
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
 
         try {
-            boolean using_docker = false;
+            // RuntimeServices provides services to create agents in the current platform (Local, JADE, JaCaMo, ...)
+            RuntimeServices rs = RuntimeServicesFactory.get();
+
+            boolean using_docker = true;
             String path1 = "";
             String path2 = "";
 
@@ -50,6 +53,7 @@ public class aaa_my_delete_ag extends DefaultInternalAction {
             System.out.println("Java Args0: "+args[0]);
             System.out.println("Java Args1: "+args[1]);
             System.out.println("Java Args2: "+args[2]);
+            System.out.println("Java Args3(id): "+args[3]);
             
             // String custom_args1 = args[1].replace("\"", "");
 
@@ -87,6 +91,15 @@ public class aaa_my_delete_ag extends DefaultInternalAction {
                 System.out.println("Criando...");
                 Files.write(Paths.get(path2),full_path_string.getBytes(), StandardOpenOption.CREATE);
             }
+
+            String custom_args3 = String.valueOf(args[3]);
+
+            if (rs.killAgent(custom_args3, null, 0)){
+                System.out.println("Agente removido da simulação...");
+            } else {
+                System.out.println("Erro ao remover o agente da simulação...");
+            }
+
         } catch (Exception e) {
             // printStackTrace method
             // prints line numbers + call stack

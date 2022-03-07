@@ -30,7 +30,7 @@ public class aaa_my_create_ag extends DefaultInternalAction {
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
 
-        boolean using_docker = false;
+        boolean using_docker = true;
         String path = "";
 
         if (using_docker){

@@ -11,6 +11,27 @@ initial_print2.
 	.concat("src/agt/list/",X,".asl",NAME)
 	.save_agent(NAME,[start,say(hello)]);
 	.print("Saved my information on file. Sending message to remove agent from simulation");
+
+	?previous_0(V0);
+	?previous_1(V1);
+	?previous_2(V2);
+
+	/*
+	.send(killer_agent, tell, previous_information_all(V0, V1, V2));
+	.send(killer_agent, untell, previous_information_all(V0, V1, V2));
+	*/
+
+	.send(killer_agent, tell, kill(V0, V1, V2, X));
+	.send(killer_agent, untell, kill(V0, V1, V2, X)).
+
+initial_print2.
++initial_print3 : true
+<- 
+	.print("Hello there. I'm a saver agent");
+	.my_name(X);
+	.concat("src/agt/list/",X,".asl",NAME)
+	.save_agent(NAME,[start,say(hello)]);
+	.print("Saved my information on file. Sending message to remove agent from simulation");
 	/* .send(killer_agent, tell, previous_information(10, 20, 30)); */
 	.concat("",previous_0, TESTE0)
 	.concat("",previous_1, TESTE1)
@@ -36,8 +57,12 @@ initial_print2.
 	.send(killer_agent, tell, previous_information(V2));
 
 	.send(killer_agent, tell, previous_information_all(V0, V1, V2));
+	.send(killer_agent, untell, previous_information_all(V0, V1, V2));
 
-	.send(killer_agent, tell, kill(X)).
+	.send(killer_agent, tell, kill(X));
+	.send(killer_agent, untell, kill(X)).
+
+	/* .send(killer_agent, tell, kill(X)). */
 
 +anser_previous(X) : true
   <- .print("I've received a message to kill agent ",X);
