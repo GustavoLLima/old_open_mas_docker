@@ -93,7 +93,7 @@
         echo '<td>'."<button value='".$line[1]."' class='btnSubmit buttonSubmit' type='button'>".$line[1]."</button>".'</td>';
        }
        else
-        echo '<td>'."No File".'</td>';
+        echo '<td><button>'."No File".'</button></td>';
        echo '<td>'.$line[5].'</td>';
        echo "</tr>";
 
